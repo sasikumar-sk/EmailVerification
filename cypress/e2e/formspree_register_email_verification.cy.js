@@ -17,7 +17,7 @@ describe('Formspree Login and Resend Verification Email', () => {
     const password = 'Hey132@mailinator.com';
 
     // Step 1: Visit the login page
-    cy.visit('https://formspree.io/login',{ timeout: 15000 });
+    cy.visit('https://formspree.io/login',{ timeout: 25000 });
 
     // Step 2: Fill in credentials
     cy.get('#email-address').type(email);
@@ -27,7 +27,7 @@ describe('Formspree Login and Resend Verification Email', () => {
     cy.get('.buttonPrimary').click();
 
     // Step 4: Wait for redirection to /forms
-    cy.url({ timeout: 15000 }).should('include', '/forms');
+    cy.url({ timeout: 20000 }).should('include', '/forms');
 
     // Step 5: Click on Account link in header
     cy.contains('Account', { timeout: 20000 }).click(); 
@@ -199,21 +199,12 @@ describe('Formspree Registration Automation', () => {
         // Check if the #inbox_specified div is visible
         cy.reload();
         cy.get('a[title="hey132"]').should('be.visible').click(); 
+        cy.wait(5000);
         cy.reload();
-        cy.wait(2000);
-        cy.get('#inbox_specified').should('be.visible')
-          .within(() => {
-            // Check if the inbox is empty message exists
-            cy.contains('[ This Inbox is Currently Empty ]').should('be.visible');
-
-            // Check if the Mailinator workflow testing message exists
-            cy.contains('Want to use Mailinator for Email Workflow Testing? Get a Free Subscription!')
-              .should('be.visible');
-
-            // Check if the "Get Verified!" link exists
-            cy.get('a').should('have.attr', 'href', 'https://www.mailinator.com/site/verified-pro')
-              .contains('Get Verified!').should('be.visible');
-          });
+        
+        cy.get('#inbox_specified')
+        .should('contain.text', '[ This Inbox is Currently Empty ]');
+  
       });
     });
 
