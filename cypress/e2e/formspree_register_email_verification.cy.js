@@ -2,12 +2,12 @@
 import { faker } from '@faker-js/faker';
 Cypress.on('uncaught:exception', (err, runnable) => {
   if (err.message.includes('Failed to execute \'send\' on \'WebSocket\'')) {
-    return false; // Prevent Cypress from failing the test
+    return false;  
   }
 });
 Cypress.on('uncaught:exception', (err, runnable) => {
   if (err.message.includes('ResizeObserver loop')) {
-    return false; // ignore the error and continue
+    return false;  
   }
 });
 
@@ -16,23 +16,22 @@ describe('Formspree Login and Resend Verification Email', () => {
     const email = 'hey132@mailinator.com';
     const password = 'Hey132@mailinator.com';
 
-    // Step 1: Visit the login page
+    // Visit the login page
     cy.visit('https://formspree.io/login',{ timeout: 25000 });
 
-    // Step 2: Fill in credentials
+    // Fill in credentials
     cy.get('#email-address').type(email);
     cy.get('#password').type(password);
 
-    // Step 3: Submit login
+    //  Submit login
     cy.get('.buttonPrimary').click();
 
-    // Step 4: Wait for redirection to /forms
+    //  Wait for redirection to /forms
     cy.url({ timeout: 20000 }).should('include', '/forms');
-
-    // Step 5: Click on Account link in header
+    // Click on Account link in header
     cy.contains('Account', { timeout: 20000 }).click(); 
 
-    // Step 7: Click the SVG resend icon
+    // Step 7: Click the SVG resend icon to trigger the email
     cy.get('svg[aria-hidden="true"].primaryLink.cursor-pointer').click();
 
     // Step 8: Check toast message
@@ -43,9 +42,9 @@ describe('Formspree Login and Resend Verification Email', () => {
 });
 
  
-
+ /*
 describe('Formspree Registration Automation', () => {
-  /*it('Registers a user with a temp email', () => {
+ it('Registers a user with a temp email', () => {
      const email = Cypress.env('EMAIL_ADDRESS');
  
      cy.visit('https://formspree.io/register');
@@ -76,6 +75,7 @@ describe('Formspree Registration Automation', () => {
       .should('contain.text', `Welcome, ${firstName}Tell us about yourself.`);
      //cy.get(':nth-child(1) > .gap-y-10').contains("Welcome, John. Tell us about yourself.")
    }); 
+    });
  */
 
 
@@ -99,7 +99,7 @@ describe('Formspree Registration Automation', () => {
       //  Access iframe and extract the Mailinator linker URL
       cy.getIframeBody('#html_msg_body')
         .contains('strong', 'Verify email')  // Find the text "Verify email"
-        .parents('a')  // Get the parent anchor (link)
+        .parents('a')  
         .then(($a) => {
           const href = $a.attr('href'); // Extract the href attribute
           cy.log('Extracted verification link:', href);
@@ -144,8 +144,6 @@ describe('Formspree Registration Automation', () => {
         expect(jsonData.headers.subject).to.not.be.empty; // Ensure subject is not empty
         expect(jsonData.headers.from).to.not.be.empty; // Ensure 'from' is not empty
         expect(jsonData.headers.to).to.not.be.empty; // Ensure 'to' is not empty
-
-        // You can add further validations as needed
         expect(jsonData.headers.from).to.include('accounts@formspree.io');
       });
     });
@@ -157,7 +155,7 @@ describe('Formspree Registration Automation', () => {
       cy.get('.wrapper-table tr').eq(1).click();
 
       // Ensure the "Links" tab is visible and click it
-      cy.get('#pills-links-tab').should('be.visible').click(); // Click the "Links" tab 
+      cy.get('#pills-links-tab').should('be.visible').click();  
       cy.get('#pills-links-content').should('be.visible').then(($linksContent) => {
         // Check the links inside the content and Validate table contains the "Formspree" and "Verify email" links
         cy.get('#pills-links-content table tbody tr').each(($row) => {
@@ -180,9 +178,7 @@ describe('Formspree Registration Automation', () => {
     it('TEST 5- SMTP log tab and verify content', () => {
       cy.visit('https://www.mailinator.com/v4/public/inboxes.jsp?to=hey132');
       cy.get('.wrapper-table tr').eq(1).click();
-      cy.get('#pills-smtplog-tab').should('be.visible').click(); // Click the "SMTP Log" tab
-
-      // Wait for the content inside #pills-smtplog-content to load and be visible
+      cy.get('#pills-smtplog-tab').should('be.visible').click(); // Click the "SMTP Log" tab 
       cy.get('#pills-smtplog-content').should('be.visible').then(($smtpLogContent) => {
         // Check for the outgoing log message with '250 Ok'
         cy.get('#pills-smtplog-content').contains('OUTGOING').should('exist');
@@ -196,7 +192,7 @@ describe('Formspree Registration Automation', () => {
           .should('be.visible')
           .click();
 
-        // Check if the #inbox_specified div is visible
+        // Check if the #inbox_specified div is visible and should be Empty
         cy.reload();
         cy.get('a[title="hey132"]').should('be.visible').click(); 
         cy.wait(5000);
@@ -209,6 +205,6 @@ describe('Formspree Registration Automation', () => {
     });
 
   });
-});  
+ 
 
  
