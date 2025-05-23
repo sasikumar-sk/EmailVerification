@@ -21,23 +21,23 @@ This Cypress project automates the end-to-end workflow of:
 
 ## ✨ **Features Automated**
 
-### 🔐 **1. User Registration (Formcarry)**
+### **1. User Registration (Formcarry)**
 - Registers a user on **Formcarry** using randomly generated data
 - Sends a verification email to a **Mailosaur** email address
 - Verifies the toast message displayed after registration
 
-### 📬 **2. Email Verification (Mailosaur)**
+### **2. Email Verification (Mailosaur)**
 - Logs into **Mailosaur**
 - Checks the received verification email
 - Extracts the verification link from the email
 - Compares the email timestamp with the current date using `Dayjs`
 - Validates the email structure (subject, sender,API payload,attachments  etc.)
 
-### 🔁 **3. Verification Link Extraction**
+### **3. Verification Link Extraction**
 - Extracts and follows the verification link from the **HTML** content in the email
 - Validates that the Formcarry verification page shows a success message: `Your email is verified!`
 
-### 🧹 **4. Email Cleanup**
+### **4. Email Cleanup**
 - Deletes the verification email from Mailosaur after testing
 
 ---
