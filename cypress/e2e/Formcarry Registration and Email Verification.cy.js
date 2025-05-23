@@ -38,7 +38,7 @@ describe('Formcarry Registration and Email Verification test', () => {
 });
 
  
-describe('Mailosaur Email Verification Flow for Formcarry', () => {
+describe('Mailosaur Email Verification Flow for Formcarry email', () => {
   const Mailosauremail = 'heysk007@gmail.com';
   const emailtest = 'tip-number@mtwxiidq.mailosaur.net';
   const email = 'heysk007@gmail.com';
@@ -63,9 +63,9 @@ describe('Mailosaur Email Verification Flow for Formcarry', () => {
       .invoke('text')
       .then((dateText) => {
         // Trim any extra whitespace
-        const extractedDate = dateText.trim().split(',')[0]; // Extracts "May 22"
+        const extractedDate = dateText.trim().split(',')[0]; // Extracts "May 23"
         // Format the current date to match the extracted format
-        const currentDate = Cypress.dayjs().format('MMM DD'); // Formats as "May 22"
+        const currentDate = Cypress.dayjs().format('MMM DD'); // Formats as "May 23"
         // Log both dates for debugging
         cy.log('Extracted Date:', extractedDate);
         cy.log('Current Date:', currentDate);
@@ -74,7 +74,7 @@ describe('Mailosaur Email Verification Flow for Formcarry', () => {
       });
 
 
-    // Wait for inbox to load and check 2 emails exist
+    // Wait for inbox to load and check 1 emails exist
     cy.get('table[data-testid="message-list"] tbody tr', { timeout: 50000 })
       .should('have.length', 1);
    
@@ -122,6 +122,7 @@ describe('Mailosaur Email Verification Flow for Formcarry', () => {
             .should('contain.text', 'Your email is verified');
         });
 
+        //login mailosaur and clear the emails
         cy.visit('https://mailosaur.com/app/login');
         cy.get('#email').type(Mailosauremail);
         cy.get("button[type='submit']").click();
