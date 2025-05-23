@@ -1,49 +1,54 @@
-📧 Formspree Email Verification Automation
+# 📧 **Formcarry Email Verification Automation**
 
 This Cypress project automates the end-to-end workflow of:
 
-- **Registering a new user on Formspree**
-- **Receiving the email via Mailinator**
-- **Verifying the email content across multiple tabs (HTML, Text, JSON, SMTP)**
-- **Extracting verification links**
-- **Re-sending email verification from Formspree dashboard**
+- **Registering a new user on Formcarry**
+- **Receiving the email via Mailosaur**
+- **Verifying the email content**
+- **Extracting the verification link**
+- **Verifying the verification link**
+- **Verifying the login process after registration**
 
-## 🚀 Tech Stack
+## 🚀 **Tech Stack**
 
-- [Cypress](https://www.cypress.io/) for test automation
-- [Faker](https://github.com/faker-js/faker) for dynamic user data generation
-- [Mailinator](https://mailinator.com) for public inbox email retrieval
-- Git + GitHub for version control
+- [**Cypress**](https://www.cypress.io/) for test automation
+- [**Cypress-MailSlurp**](https://www.npmjs.com/package/cypress-mailslurp) for Mailosaur email retrieval and validation
+- [**Dayjs**](https://day.js.org/) for date manipulation and validation
+- [**Git + GitHub**](https://github.com/) for version control
 
 ---
 
-## ✨ Features Automated
+## ✨ **Features Automated**
 
-### 🔐 1. **User Registration (Formspree)**
-- Generates random user data using `@faker-js/faker`
-- Uses a public email inbox (Mailinator)
-- Registers a user with verification link sent to Mailinator
+### 🔐 **1. User Registration (Formcarry)**
+- Registers a user on **Formcarry** using randomly generated data
+- Sends a verification email to a **Mailosaur** email address
+- Verifies the toast message displayed after registration
 
-### 📬 2. **Email Verification**
-- Accesses Mailinator inbox
-- Verifies sender and subject line
-- Checks content in:
-  - **HTML tab** – Extracts the verification link
-  - **TEXT tab** – Confirms textual contents and verification info
-  - **JSON tab** – Validates `from`, `to`, and `subject`
-  - **Links tab** – Extracts clickable verification links
-  - **SMTP log tab** – Ensures mail delivery (`250 OK`, `QUIT`)
+### 📬 **2. Email Verification (Mailosaur)**
+- Logs into **Mailosaur**
+- Checks the received verification email
+- Extracts the verification link from the email
+- Compares the email timestamp with the current date using `Dayjs`
+- Validates the email structure (subject, sender,API payload,attachments  etc.)
 
-### 🔁 3. **Resend Email Verification**
-- Logs into Formspree
-- Navigates to **Linked Emails**
-- Clicks resend icon
-- Validates toast message: `verification email re-sent`
+### 🔁 **3. Verification Link Extraction**
+- Extracts and follows the verification link from the **HTML** content in the email
+- Validates that the Formcarry verification page shows a success message: `Your email is verified!`
 
-### 🧹 4. **Email Cleanup**
-- Deletes email from Mailinator inbox
-- Verifies that the inbox is now empty
-- 
+### 🧹 **4. Email Cleanup**
+- Deletes the verification email from Mailosaur after testing
+
+---
+
+## 🔧 **Setup Instructions**
+
+### **Clone the repo**
+
+
+git clone https://github.com/your-username/your-repository.git
+cd your-repository
+
 ---
 
 ## 🔧 Setup Instructions
@@ -57,39 +62,44 @@ cd EmailVerification
 ### Install dependencies
 
 npm install
+```json
 ### Configure environment variables
 
 You can set up environment values in cypress.config.js or cypress.env.json:
  
 {
   "EMAIL_ADDRESS": "hey132@mailinator.com",
-  "Searchword": "hey132"
+  "Searchword": "hey132",
+  "EMAIL_ADDRESS1": "hey13245@mailinator.com",
+  "Searchword1": "hey13245",
 }
+``` 
 
 ### Run tests
 npx cypress open
 
 ---
+### Sample Test Scenarios
 
-🔍 Sample Test Scenarios
+✅ Before Registration – Test the user login with test email
 
-✅ Registration completes with random user data
+✅ User Registration – Registers a new user on Formcarry with a test email and password.
 
-✅ Email received in Mailinator within timeout
+✅ Email Received in Mailosaur – Checks if the verification email is received within the timeout period.
 
-✅ Verification link can be extracted from HTML and TEXT tabs
+✅ Verification Link Extraction – Extracts and follows the verification link in the HTML email.
 
-✅ SMTP logs confirm email was sent successfully
+✅ Verification Link – Open the Verification link and confrim Verification successfully
 
-✅ JSON structure of the email is valid
+✅ Email Content Validation – Ensures that the email contains correct content such as sender, subject, and timestamp.
 
-✅ User can resend verification link from Formspree dashboard
+✅ Login After Registration – Verifies that the user can log in successfully after email verification.
 
-✅ Old emails are removed from inbox
+✅ Email Cleanup – Deletes the test email from Mailosaur after testing.
 
----
 
-👥 Contributors
-Sasikumar – QA Engineer
-@Pratheepa – QA Engineer
+🧑‍🤝‍🧑 Contributors
+-Sasikumar – QA Engineer
+-Pratheepa – QA Engineer
+
 
