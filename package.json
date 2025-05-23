@@ -11,10 +11,14 @@
   "description": "",
   "devDependencies": {
     "axios": "^1.9.0",
-    "cypress": "^14.3.3"
+    "cypress": "^14.4.0",
+    "cypress-mailslurp": "^1.10.0"
   },
   "dependencies": {
     "@faker-js/faker": "^9.8.0",
-    "dotenv": "^16.5.0"
+    "cypress-clipboard": "^1.0.3",
+    "dayjs": "^1.11.13",
+    "dotenv": "^16.5.0",
+    "mailosaur": "^8.8.1"
   }
 }
