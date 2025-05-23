@@ -1,10 +1,10 @@
 # 📧 **Formcarry Email Verification Automation**
 
-This Cypress project automates the end-to-end workflow of:
+This Cypress project automates the workflow of:
 
 - **Registering a new user on Formcarry**
 - **Receiving the email via Mailosaur**
-- **Verifying the email content**
+- **Verifying the email content like API,Attachment,Email body**
 - **Extracting the verification link**
 - **Verifying the verification link**
 - **Verifying the login process after registration**
@@ -42,7 +42,7 @@ This Cypress project automates the end-to-end workflow of:
 
 ---
 
-## 🔧 **Setup Instructions**
+## **Setup Instructions**
 
 ### **Clone the repo**
 
@@ -52,7 +52,7 @@ cd your-repository
 
 ---
 
-## 🔧 Setup Instructions
+## Setup Instructions
 
 ### Clone the repo
 
