@@ -12,9 +12,10 @@ This Cypress project automates the end-to-end workflow of:
 ## 🚀 **Tech Stack**
 
 - [**Cypress**](https://www.cypress.io/) for test automation
-- [**Cypress-MailSlurp**](https://www.npmjs.com/package/cypress-mailslurp) for Mailosaur email retrieval and validation
+- [**MailSlurp**]([https://www.npmjs.com/package/cypress-mailslurp](https://mailosaur.com/)) for Mailosaur email retrieval and validation
+- [**Formcarry**](https://app.formcarry.com/login) for user Registration 
 - [**Dayjs**](https://day.js.org/) for date manipulation and validation
-- [**Git + GitHub**](https://github.com/) for version control
+- [**GitHub**](https://github.com/) for version control
 
 ---
 
